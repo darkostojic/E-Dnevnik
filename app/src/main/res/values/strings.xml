@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">E-Dnevnik</string>
+
+    <string-array name="subjects">
+        <item>Matematika</item>
+        <item>Hrvatski</item>
+        <item>Engleski</item>
+        <item>Informatika</item>
+        <item>Povijest</item>
+        <item>Zemljopis</item>
+        <item>Biologija</item>
+        <item>Fizika</item>
+        <item>Kemija</item>
+        <item>Tjelesno</item>
+    </string-array>
+
 </resources>
