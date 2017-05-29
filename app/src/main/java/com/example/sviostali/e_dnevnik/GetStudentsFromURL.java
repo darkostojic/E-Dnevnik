@@ -2,6 +2,7 @@ package com.example.sviostali.e_dnevnik;
 
 import android.app.Application;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v4.app.AppLaunchChecker;
 import android.util.Log;
@@ -18,17 +19,21 @@ public class GetStudentsFromURL extends AsyncTask<Void, Void, Void> {
     private ProgressDialog pDialog;
     private static String url = "https://api.github.com/users";
     public DBHelper dbMain;
+    private Context mContext;
+
+    public GetStudentsFromURL(Context context){
+        this.mContext = context;
+    }
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
         // Showing progress dialog
-        /*
-        pDialog = new ProgressDialog();
+
+        pDialog = new ProgressDialog(mContext);
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
         pDialog.show();
-        */
 
     }
 
@@ -39,8 +44,10 @@ public class GetStudentsFromURL extends AsyncTask<Void, Void, Void> {
         // Making a request to url and getting response
         String jsonStr = sh.makeServiceCall(url);
 
+        Log.i("Json", jsonStr);
+
         Log.e(TAG, "Response from url: " + jsonStr);
-        dbMain = new DBHelper(MyApplication.getAppContext());
+        dbMain = new DBHelper(mContext);
         if (jsonStr != null) {
             try {
 
@@ -52,7 +59,8 @@ public class GetStudentsFromURL extends AsyncTask<Void, Void, Void> {
 
                     String login = c.getString("login");
                     String avatar = c.getString("avatar_url");
-                    //dbMain.insertUserData(login, "1234", avatar, 0);
+                    Log.i("login", login + "   " + avatar);
+                    dbMain.insertUserData(login, "1234", avatar, 0);
 
 
                 }
@@ -71,6 +79,8 @@ public class GetStudentsFromURL extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void result) {
         super.onPostExecute(result);
+        pDialog.dismiss();
+        dbMain.getUsers();
         // Dismiss the progress dialog
         /*if (pDialog.isShowing())
             pDialog.dismiss();

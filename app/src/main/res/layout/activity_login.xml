@@ -51,4 +51,5 @@
         android:layout_marginTop="15dp"
         android:backgroundTint="@color/buttonColor"
         android:text="@string/login_bLogin" />
+
 </RelativeLayout>

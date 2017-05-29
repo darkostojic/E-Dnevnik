@@ -6,6 +6,7 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 
 public class DBHelper extends SQLiteOpenHelper {
@@ -73,13 +74,20 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put(USER_COL_4, avatar);
         contentValues.put(USER_COL_5, professor);
 
-        long result = db.insert(USER_TABLE, null, contentValues);
-        db.close();
-        if(result == -1){
+        try {
+            db.insert(USER_TABLE, null, contentValues);
+            db.close();
+            Log.i("Return true", "Return true");
+            return true;
+        } catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        /*if(result == -1){
             return false;
         } else {
             return true;
-        }
+        }*/
     }
 
     //Function that returns all users from database

@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        GetStudentsFromURL gsfu = new GetStudentsFromURL();
+        GetStudentsFromURL gsfu = new GetStudentsFromURL(MainActivity.this);
         gsfu.execute();
 
 
