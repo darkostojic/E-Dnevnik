@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     public DBHelper dbMain;
     public TextView tvData;
     public Button but;
-
+    public GetUsersFromJSON g;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,11 +24,11 @@ public class MainActivity extends AppCompatActivity {
         tvData = (TextView) findViewById(R.id.tvData);
         dbMain = new DBHelper(this);
 
-
         but.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                insertUserData();
+                g = new GetUsersFromJSON(MainActivity.this);
+
             }
         });
 
@@ -41,23 +41,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        GetStudentsFromURL gsfu = new GetStudentsFromURL(MainActivity.this);
-        gsfu.execute();
-
-
-
     }
-
-    private void insertUserData(){
-        boolean insert = dbMain.insertUserData("test1", "test1", "test1", 1);
-        if(insert){
-            Toast.makeText(getApplicationContext(), "uspjeh", Toast.LENGTH_SHORT).show();
-            Log.i("insertData", "Success!");
-        }else{
-            Log.i("insertData", "Failed!");
-        }
-    }
-
 
     private void showData(){
         Cursor getDataNow = dbMain.getUsers();
