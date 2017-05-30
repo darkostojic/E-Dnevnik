@@ -6,11 +6,12 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 
 public class DBHelper extends SQLiteOpenHelper {
 
-
+    public GetUsersFromJSON getUsersFromJSON;
     public Context c;
     private static final String DATABASE_NAME = "EDnevnik.db";
     private static final int VERSION = 1;
@@ -23,7 +24,10 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String USER_COL_2 = "login";
     public static final String USER_COL_3 = "password";
     public static final String USER_COL_4 = "avatar";
-    public static final String USER_COL_5 = "professor";
+    public static final String USER_COL_5 = "first_name";
+    public static final String USER_COL_6 = "last_name";
+    public static final String USER_COL_7 = "birth_date";
+    public static final String USER_COL_8 = "professor";
 
     //Data for subject table
 
@@ -44,6 +48,9 @@ public class DBHelper extends SQLiteOpenHelper {
                 "login text not null," +
                 "password text not null," +
                 "avatar text not null," +
+                "first_name text not null," +
+                "last_name text not null," +
+                "birth_date text not null," +
                 "professor integer not null)");
 
         //This function creates Subject table in database
@@ -53,6 +60,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "subject_name text not null)");
 
         addSubjectsToDB(db, c);
+        addStudentsToDB(c);
 
 
     }
@@ -60,26 +68,39 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + USER_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + SUBJECT_TABLE);
     }
 
 
     //Function for inserting users into database
 
-    public boolean insertUserData(String login, String password, String avatar, int professor){
+    public boolean insertUserData(String login, String password, String avatar,String first_name,String last_name,
+                                  String birth_date, int professor){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(USER_COL_2, login);
         contentValues.put(USER_COL_3, password);
         contentValues.put(USER_COL_4, avatar);
-        contentValues.put(USER_COL_5, professor);
+        contentValues.put(USER_COL_5, first_name);
+        contentValues.put(USER_COL_6, last_name);
+        contentValues.put(USER_COL_7, birth_date);
+        contentValues.put(USER_COL_8, professor);
 
-        long result = db.insert(USER_TABLE, null, contentValues);
-        db.close();
-        if(result == -1){
+
+        try {
+            db.insert(USER_TABLE, null, contentValues);
+            db.close();
+            Log.i("Return true", "Return true");
+            return true;
+        } catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        /*if(result == -1){
             return false;
         } else {
             return true;
-        }
+        }*/
     }
 
     //Function that returns all users from database
@@ -126,6 +147,11 @@ public class DBHelper extends SQLiteOpenHelper {
             long result = db.insert(SUBJECT_TABLE, null, contentValues);
         }
 
+    }
+
+    public void addStudentsToDB(Context c){
+        getUsersFromJSON = new GetUsersFromJSON(c);
+        getUsersFromJSON.getData();
     }
 
 }
