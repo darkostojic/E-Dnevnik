@@ -7,7 +7,7 @@
     tools:context="com.example.sviostali.e_dnevnik.Login">
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/etLUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -18,15 +18,15 @@
         android:inputType="textPersonName" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/etLPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText"
-        android:layout_alignStart="@+id/editText"
-        android:layout_below="@+id/editText"
+        android:layout_alignLeft="@+id/etLUsername"
+        android:layout_alignStart="@+id/etLUsername"
+        android:layout_below="@+id/etLUsername"
         android:ems="10"
         android:hint="@string/login_password"
-        android:inputType="textPersonName" />
+        android:inputType="numberPassword" />
 
     <Button
         android:id="@+id/btnLBack"
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/editText2"
+        android:layout_below="@+id/etLPassword"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="15dp"
         android:backgroundTint="@color/buttonColor"
@@ -46,10 +46,35 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/editText2"
+        android:layout_below="@+id/etLPassword"
         android:layout_marginRight="40dp"
         android:layout_marginTop="15dp"
         android:backgroundTint="@color/buttonColor"
         android:text="@string/login_bLogin" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/btnLBack"
+        android:layout_marginTop="34dp"
+        android:text="  Nemate korisnički račun? "
+        android:textColor="#000"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/btnLRegister"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView2"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_toEndOf="@+id/textView2"
+        android:layout_toRightOf="@+id/textView2"
+        android:text="Registrirajte se."
+        android:textColor="@color/buttonColor"
+        android:textStyle="bold" />
 
 </RelativeLayout>

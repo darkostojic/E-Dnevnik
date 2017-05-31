@@ -1,8 +1,14 @@
 package com.example.sviostali.e_dnevnik;
 
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,9 +18,25 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 
 public class UserInfo extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    // tvui1,itd radi lakseg gledanja, avatar isto tako
+    Button btnUI1, btnUI2;
+    TextView tvUI1, tvUI2, tvUI3, tvUI4;
+    ImageView avatar;
+    public String username, avatarurl;
+    public DBHelper myDb;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +45,20 @@ public class UserInfo extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        tvUI1 = (TextView) findViewById(R.id.tvUIUsername);
+        tvUI2 = (TextView) findViewById(R.id.tvUIProsjek);
+        tvUI3 = (TextView) findViewById(R.id.tvUIRedovitost);
+        tvUI4 = (TextView) findViewById(R.id.tvUIRodjendan);
+        avatar = (ImageView) findViewById(R.id.iv_uiavatar);
+        btnUI1 = (Button) findViewById(R.id.btnUI1);
+        btnUI2 = (Button) findViewById(R.id.btnUI2);
+
+        myDb = new DBHelper(this);
+
+        /** Iz bundlea uzme username, i u showdata provjeri username i pokupi ostale podatke da ih moze koristiti*/
+        Bundle s = getIntent().getExtras();
+        username = s.getString("username");
+        showData();
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,4 +134,39 @@ public class UserInfo extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
+    public void showData(){
+        Cursor showDataNow = myDb.getData();
+        if(showDataNow.getCount() == 0){
+            Toast.makeText(this, "No data.", Toast.LENGTH_SHORT).show();
+        }else{
+
+            while (showDataNow.moveToNext()) {
+
+                String a = showDataNow.getString(showDataNow.getColumnIndex("login"));
+                if((a.equals(username))){
+                    if(showDataNow.getInt(showDataNow.getColumnIndex("professor"))==1) { //Gornje za profesore, donje za studente
+                        tvUI1.setText("Username: "+showDataNow.getString(showDataNow.getColumnIndex("login")));
+                        tvUI2.setText("Ime: "+showDataNow.getString(showDataNow.getColumnIndex("first_name")));
+                        tvUI3.setText("Prezime: "+showDataNow.getString(showDataNow.getColumnIndex("last_name")));
+                        avatarurl = showDataNow.getString(showDataNow.getColumnIndex("avatar"));
+
+                        tvUI4.setText(showDataNow.getString(showDataNow.getColumnIndex("birth_date")));
+                        btnUI1.setText("Vaši predmeti");        // dodat onclicklistenere za sva 4 kad napravimo predmete i ocjene itd
+                        btnUI2.setText("Dodavanje predmeta");
+                    }else{
+                        tvUI1.setText("Username: "+showDataNow.getString(showDataNow.getColumnIndex("login")));
+                        tvUI2.setText("Ime: "+showDataNow.getString(showDataNow.getColumnIndex("first_name")));
+                        tvUI3.setText("Prezime: "+showDataNow.getString(showDataNow.getColumnIndex("last_name")));
+                        tvUI4.setText(showDataNow.getString(showDataNow.getColumnIndex("birth_date")));
+                        btnUI1.setText("Popis profesora");
+                        btnUI2.setText("Ocjene");
+                    }
+                }
+            }
+        }
+
+    }
+
 }

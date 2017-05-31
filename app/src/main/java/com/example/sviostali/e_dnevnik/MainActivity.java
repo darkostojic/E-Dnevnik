@@ -1,5 +1,6 @@
 package com.example.sviostali.e_dnevnik;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,16 +15,17 @@ public class MainActivity extends AppCompatActivity {
 
     public DBHelper dbMain;
     public TextView tvData;
-    public Button but;
+    public Button but, button2;
     public GetUsersFromJSON g;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         but = (Button) findViewById(R.id.button);
+        button2 = (Button) findViewById(R.id.button2);
         tvData = (TextView) findViewById(R.id.tvData);
         dbMain = new DBHelper(this);
-
+        but.setText("Test");
         but.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,6 +39,14 @@ public class MainActivity extends AppCompatActivity {
             public boolean onLongClick(View v) {
                 showData();
                 return false;
+            }
+        });
+
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, Login.class);
+                startActivity(i);
             }
         });
 

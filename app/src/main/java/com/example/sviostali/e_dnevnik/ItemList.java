@@ -1,12 +1,7 @@
 package com.example.sviostali.e_dnevnik;
 
-public class ItemList {
+import android.support.v7.app.AppCompatActivity;
 
-    public String username;
-    public int logo;
+public class ItemList extends AppCompatActivity {
 
-    ItemList(String username, int logo){
-        this.username = username;
-        this.logo = logo;
-    }
 }

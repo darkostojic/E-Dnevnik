@@ -16,7 +16,6 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "EDnevnik.db";
     private static final int VERSION = 1;
 
-
     //Data for user table
 
     public static final String USER_TABLE = "user";
@@ -109,6 +108,17 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor getDataNow = db.rawQuery("SELECT login" +
                 " FROM " + USER_TABLE + " order by id asc", null);
+        return getDataNow;
+    }
+
+
+    /**Dodao, radi provjere nije mi se dalo trazit drugi nacin kako da provjerim login, nebi trebalo smetat pa zasad nek stoji dok se ne dog
+     * cilj dohvatit sve podatke da ih mogu koristiti za login i user info
+     * -Edo*/
+    public Cursor getData(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor getDataNow = db.rawQuery("SELECT id, login, password, avatar, first_name, last_name, birth_date, professor FROM " + USER_TABLE + " order by id asc", null);
+
         return getDataNow;
     }
 
