@@ -1,5 +1,6 @@
 package com.example.sviostali.e_dnevnik;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -98,6 +99,9 @@ public class Register extends AppCompatActivity {
         boolean insert = myDb.insertUserData(username, password, "https://www.iconfinder.com/data/icons/rcons-user-action/32/boy-512.png" , firstName, lastName, dateofbirth, 1 );
         if(insert){
             Toast.makeText(this, "Uspješno ste se registrirali! Sada se možete prijaviti.", Toast.LENGTH_LONG).show();
+            Intent i = new Intent(Register.this, SubjectListActivity.class);
+            startActivity(i);
+            finish();
         }else{
             Toast.makeText(this, "Greška.", Toast.LENGTH_SHORT).show();
         }

@@ -26,4 +26,5 @@
     <string name="login_password">Lozinka</string>
     <string name="login_bBack">Odustani</string>
     <string name="login_bLogin">Prijavi Se</string>
+    <string name="SubjectList_bAccept">Potvrdi</string>
 </resources>
