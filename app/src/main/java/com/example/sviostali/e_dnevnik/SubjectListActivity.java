@@ -29,12 +29,15 @@ public class SubjectListActivity extends AppCompatActivity {
         bAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for(int i = 0;i < subjectListAdapter.getCount();i++){
+                /*for(int i = 0;i < subjectListAdapter.getCount();i++){
 
                     View view = lvSubjects.getAdapter().getView(i,null,lvSubjects);
                     String s = ((TextView) view.findViewById(R.id.tvSubject)).getText().toString();
                     Boolean b = ((CheckBox) view.findViewById(R.id.cbIsMarked)).isChecked();
 
+                }*/
+                for (SubjectList sl : subjectListAdapter.getSubjectList()){
+                    Log.i("Ovaj je oznacen", sl.getSubject());
                 }
             }
         });

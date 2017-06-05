@@ -11,23 +11,27 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class SubjectListAdapter extends BaseAdapter {
 
-    public ArrayList<SubjectList> list;
+    public List<String> list;
+    private List<SubjectList> subjectList;
     public Context context;
 
     public SubjectListAdapter(Context c){
         context = c;
+        list = Arrays.asList(context.getResources().getStringArray(R.array.subjects));
         Resources res = context.getResources();
         String[] subjects = res.getStringArray(R.array.subjects);
 
-        list = new ArrayList<SubjectList>();
+        subjectList = new ArrayList<SubjectList>();
 
 
-        for(int i = 0;i < subjects.length;i++){
-            list.add(new SubjectList(subjects[i]));
+        for(int i = 0;i < list.size();i++){
+            subjectList.add(new SubjectList(subjects[i]));
         }
 
     }
@@ -53,15 +57,29 @@ public class SubjectListAdapter extends BaseAdapter {
         View row = layoutInflater.inflate(R.layout.subject_list, viewGroup, false);
 
         TextView subject = (TextView) row.findViewById(R.id.tvSubject);
-        final CheckBox isMarked = (CheckBox) row.findViewById(R.id.cbIsMarked);
+        CheckBox isMarked = (CheckBox) row.findViewById(R.id.cbIsMarked);
 
-        SubjectList temp = list.get(position);
+        final SubjectList temp = subjectList.get(position);
 
         subject.setText(temp.subject);
+        isMarked.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (temp.isMarked()){
+                    temp.setMarked(false);
+                } else {
+                    temp.setMarked(true);
+                }
+            }
+        });
         return row;
     }
 
+    public List<SubjectList> getSubjectList() {
+        return subjectList;
+    }
 
-
-
+    public void setSubjectList(List<SubjectList> subjectList) {
+        this.subjectList = subjectList;
+    }
 }
