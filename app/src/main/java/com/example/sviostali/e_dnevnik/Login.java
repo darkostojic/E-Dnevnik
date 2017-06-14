@@ -10,21 +10,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.sviostali.e_dnevnik.sugarclasses.usersugar;
+import com.orm.SugarContext;
+
+import java.util.List;
 
 
 public class Login extends AppCompatActivity {
-
     EditText etLUsername, etLPassword;
     Button btnLBack, btnLLogin, btnLRegister;
     public String username, password;
-    public DBHelper myDb;
+    public long id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SugarContext.init(this);
         setContentView(R.layout.activity_login);
-
-        myDb = new DBHelper(this);
 
         etLUsername = (EditText) findViewById(R.id.etLUsername);
         etLPassword = (EditText) findViewById(R.id.etLPassword);
@@ -32,11 +34,15 @@ public class Login extends AppCompatActivity {
         btnLLogin = (Button) findViewById(R.id.btnLLogin);
         btnLRegister = (Button) findViewById(R.id.btnLRegister);
 
+
+
         /**
          * 3 onclicklistenera, login posalje samo username pa sam mislio napravit da userinfo prihvati username,
          * pretrazi bazu i zatim ispise podatke ovisno o tome da li se radi o profesoru ili uceniku
          * -Edo
          * **/
+
+
         btnLBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,7 +57,7 @@ public class Login extends AppCompatActivity {
                 if( !etLPassword.getText().toString().equals("") && !etLUsername.getText().toString().equals("")){ //Lozinka i korisnicko moraju biti popunjeni
                     if(checkLogin()==true){
                         Intent i = new Intent(Login.this, UserInfo.class);
-                        i.putExtra("username", username);
+                        i.putExtra("id", id);
                         startActivity(i);
                         finish();
                     }else{
@@ -70,31 +76,37 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(Login.this, Register.class);
                 startActivity(i);
+                finish();
             }
         });
 
     }
 
     public boolean checkLogin(){
-        Cursor showDataNow = myDb.getData();
+
+        List<usersugar> allUsers = usersugar.listAll(usersugar.class);
+
         boolean rtrn = false;
-        if(showDataNow.getCount() == 0){
+        if(allUsers.isEmpty()){
             Toast.makeText(this, "No data.", Toast.LENGTH_SHORT).show();
 
         }else{
 
-            while (showDataNow.moveToNext()) {
+            for(int i = 0;i<allUsers.size();i++) {
 
-                String a = showDataNow.getString(showDataNow.getColumnIndex("login"));
-                String b = showDataNow.getString(showDataNow.getColumnIndex("password"));
-                if((a.equals(etLUsername.getText().toString()))&&(b.equals(etLPassword.getText().toString()))){
+                String a = allUsers.get(i).getLogin();
+                String b = allUsers.get(i).getPassword();
+
+                if ((a.equals(etLUsername.getText().toString())) && (b.equals(etLPassword.getText().toString()))) {
                     username = a;
                     password = b;
+                    id = allUsers.get(i).getId();
                     rtrn = true;
                     Toast.makeText(this, "Uspjesno ulogirani!", Toast.LENGTH_SHORT).show();
-                }
 
+                }
             }
+
         }
         return rtrn;
     }

@@ -68,7 +68,7 @@
         android:layout_centerHorizontal="true"
         android:ems="10"
         android:hint="Datum rodjenja"
-        android:inputType="date" />
+        android:inputType="datetime" />
 
     <Button
         android:id="@+id/btnRRegister"

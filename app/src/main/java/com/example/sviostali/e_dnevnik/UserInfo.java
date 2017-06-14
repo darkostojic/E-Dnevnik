@@ -1,5 +1,6 @@
 package com.example.sviostali.e_dnevnik;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -27,6 +28,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
+import com.example.sviostali.e_dnevnik.sugarclasses.usersugar;
+import com.orm.SugarContext;
+
 public class UserInfo extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -35,12 +39,13 @@ public class UserInfo extends AppCompatActivity
     TextView tvUI1, tvUI2, tvUI3, tvUI4;
     ImageView avatar;
     public String username, avatarurl;
-    public DBHelper myDb;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SugarContext.init(this);
         setContentView(R.layout.activity_user_info);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -53,20 +58,17 @@ public class UserInfo extends AppCompatActivity
         btnUI1 = (Button) findViewById(R.id.btnUI1);
         btnUI2 = (Button) findViewById(R.id.btnUI2);
 
-        myDb = new DBHelper(this);
+
 
         /** Iz bundlea uzme username, i u showdata provjeri username i pokupi ostale podatke da ih moze koristiti*/
         Bundle s = getIntent().getExtras();
-        username = s.getString("username");
-        showData();
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
+        long id = s.getLong("id");
+        int tmp = Integer.parseInt(String.valueOf(id));
+        showData(tmp);
+
+
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -136,36 +138,37 @@ public class UserInfo extends AppCompatActivity
     }
 
 
-    public void showData(){
-        Cursor showDataNow = myDb.getData();
-        if(showDataNow.getCount() == 0){
-            Toast.makeText(this, "No data.", Toast.LENGTH_SHORT).show();
-        }else{
+    public void showData(final int id){
 
-            while (showDataNow.moveToNext()) {
 
-                String a = showDataNow.getString(showDataNow.getColumnIndex("login"));
-                if((a.equals(username))){
-                    if(showDataNow.getInt(showDataNow.getColumnIndex("professor"))==1) { //Gornje za profesore, donje za studente
-                        tvUI1.setText("Username: "+showDataNow.getString(showDataNow.getColumnIndex("login")));
-                        tvUI2.setText("Ime: "+showDataNow.getString(showDataNow.getColumnIndex("first_name")));
-                        tvUI3.setText("Prezime: "+showDataNow.getString(showDataNow.getColumnIndex("last_name")));
-                        avatarurl = showDataNow.getString(showDataNow.getColumnIndex("avatar"));
+        usersugar user = usersugar.findById(usersugar.class, id);
 
-                        tvUI4.setText(showDataNow.getString(showDataNow.getColumnIndex("birth_date")));
-                        btnUI1.setText("Vaši predmeti");        // dodat onclicklistenere za sva 4 kad napravimo predmete i ocjene itd
-                        btnUI2.setText("Dodavanje predmeta");
-                    }else{
-                        tvUI1.setText("Username: "+showDataNow.getString(showDataNow.getColumnIndex("login")));
-                        tvUI2.setText("Ime: "+showDataNow.getString(showDataNow.getColumnIndex("first_name")));
-                        tvUI3.setText("Prezime: "+showDataNow.getString(showDataNow.getColumnIndex("last_name")));
-                        tvUI4.setText(showDataNow.getString(showDataNow.getColumnIndex("birth_date")));
-                        btnUI1.setText("Popis profesora");
-                        btnUI2.setText("Ocjene");
-                    }
+        tvUI1.setText("Username: "+user.getLogin());
+        tvUI2.setText("Ime: "+user.getFirstname());
+        tvUI3.setText("Prezime: "+user.getLastname());
+        avatarurl = user.getAvatar();
+        tvUI4.setText(user.getBirthdate());
+        if(user.getProfessor()==1) { //Gornje za profesore, donje za studente
+
+            btnUI1.setText("Vaši predmeti");// dodat onclicklistenere za sva 4 kad napravimo predmete i ocjene itd
+            btnUI2.setText("Dodavanje predmeta");
+
+            btnUI2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(UserInfo.this, SubjectListActivity.class);
+                    i.putExtra("id", id);
+                    startActivity(i);
                 }
-            }
+            });
+
+        }else{
+            btnUI1.setText("Popis profesora");
+            btnUI2.setText("Ocjene");
         }
+
+
+
 
     }
 

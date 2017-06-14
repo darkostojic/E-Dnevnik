@@ -8,6 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.sviostali.e_dnevnik.sugarclasses.usersugar;
+import com.orm.SugarContext;
+
 public class Register extends AppCompatActivity {
 
     EditText etRFName, etRLName, etRUsername, etRPassword1, etRPassword2, etRDateOfBirth, etRAdminKod;
@@ -15,14 +18,15 @@ public class Register extends AppCompatActivity {
 
     public String firstName, lastName, username, password, dateofbirth;
 
-    public DBHelper myDb;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SugarContext.init(this);
         setContentView(R.layout.activity_register);
 
-        myDb = new DBHelper(this);
+
 
         etRFName = (EditText) findViewById(R.id.etRFName);
         etRLName = (EditText) findViewById(R.id.etRLName);
@@ -95,16 +99,17 @@ public class Register extends AppCompatActivity {
         password = etRPassword1.getText().toString();
         dateofbirth = etRDateOfBirth.getText().toString();
 
-        //Random slika sa interneta koja izgleda kao user
-        boolean insert = myDb.insertUserData(username, password, "https://www.iconfinder.com/data/icons/rcons-user-action/32/boy-512.png" , firstName, lastName, dateofbirth, 1 );
-        if(insert){
-            Toast.makeText(this, "Uspješno ste se registrirali! Sada se možete prijaviti.", Toast.LENGTH_LONG).show();
-            Intent i = new Intent(Register.this, SubjectListActivity.class);
-            startActivity(i);
-            finish();
-        }else{
-            Toast.makeText(this, "Greška.", Toast.LENGTH_SHORT).show();
-        }
+        //Random slika sa interneta koja izgleda kao user "https://www.iconfinder.com/data/icons/rcons-user-action/32/boy-512.png"
+        String avatar = "https://www.iconfinder.com/data/icons/rcons-user-action/32/boy-512.png";
+
+        usersugar user = new usersugar(username,password,avatar,firstName,lastName,dateofbirth,1);
+        user.save();
+
+        Toast.makeText(this, "Uspješno ste se registrirali! Sada se možete prijaviti.", Toast.LENGTH_LONG).show();
+        Intent i = new Intent(Register.this, UserInfo.class);
+        startActivity(i);
+        finish();
+
 
     }
 
