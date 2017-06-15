@@ -1,5 +1,6 @@
 package com.example.sviostali.e_dnevnik.Activitys;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
@@ -14,6 +15,7 @@ public class SelectedSubjectsActivity extends AppCompatActivity {
 
     public ListView lvSSubjects;
     public SelectedSubjectListAdapter SSAdapter;
+    public int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,12 +23,14 @@ public class SelectedSubjectsActivity extends AppCompatActivity {
         SugarContext.init(this);
         setContentView(R.layout.activity_selected_subjects);
 
-        SSAdapter = new SelectedSubjectListAdapter(getApplicationContext());
+        Bundle s = getIntent().getExtras();
+        id = s.getInt("id");
+        SSAdapter = new SelectedSubjectListAdapter(getApplicationContext(), id);
 
         lvSSubjects = (ListView) findViewById(R.id.lvSelectedSubjects);
         lvSSubjects.setAdapter(SSAdapter);
 
-        
+
 
     }
 }

@@ -107,7 +107,7 @@ public class Register extends AppCompatActivity {
         user.save();
 
         Toast.makeText(this, "Uspješno ste se registrirali! Sada se možete prijaviti.", Toast.LENGTH_LONG).show();
-        Intent i = new Intent(Register.this, UserInfo.class);
+        Intent i = new Intent(Register.this, Login.class);
         startActivity(i);
         finish();
 

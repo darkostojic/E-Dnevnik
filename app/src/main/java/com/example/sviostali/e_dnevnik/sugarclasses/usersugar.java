@@ -2,6 +2,8 @@ package com.example.sviostali.e_dnevnik.sugarclasses;
 
 import com.orm.SugarRecord;
 
+import java.util.List;
+
 
 public class usersugar extends SugarRecord {
     String login;
@@ -25,6 +27,11 @@ public class usersugar extends SugarRecord {
         this.birthdate = birthdate;
         this.professor = professor;
     }
+
+    public List<subjects> getSubjects(){
+        return subjects.find(subjects.class, "user = ?", String.valueOf(this.getId()));
+    }
+
 
     public String getLogin() {
         return login;

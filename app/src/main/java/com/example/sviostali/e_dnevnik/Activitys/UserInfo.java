@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.sviostali.e_dnevnik.R;
 import com.example.sviostali.e_dnevnik.sugarclasses.usersugar;
@@ -128,7 +129,6 @@ public class UserInfo extends AppCompatActivity
 
     public void showData(final int id){
 
-
         usersugar user = usersugar.findById(usersugar.class, id);
 
         tvUI1.setText("Username: "+user.getLogin());
@@ -145,6 +145,7 @@ public class UserInfo extends AppCompatActivity
                 @Override
                 public void onClick(View v) {
                     Intent i = new Intent(UserInfo.this, SelectedSubjectsActivity.class);
+                    i.putExtra("id", id);
                     startActivity(i);
                 }
             });
