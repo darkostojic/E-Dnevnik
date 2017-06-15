@@ -19,6 +19,10 @@ public class subjects extends SugarRecord {
     }
 
 
+    public List<studentsubject> getSubjects(){
+        return studentsubject.find(studentsubject.class, "name = ?", String.valueOf(this.getId()));
+    }
+
 
     public String getName() {
         return name;
