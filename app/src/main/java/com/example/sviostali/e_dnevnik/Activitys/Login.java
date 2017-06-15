@@ -21,7 +21,7 @@ public class Login extends AppCompatActivity {
     EditText etLUsername, etLPassword;
     Button btnLBack, btnLLogin, btnLRegister;
     public String username, password;
-    public long id;
+    public int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +101,7 @@ public class Login extends AppCompatActivity {
                 if ((a.equals(etLUsername.getText().toString())) && (b.equals(etLPassword.getText().toString()))) {
                     username = a;
                     password = b;
-                    id = allUsers.get(i).getId();
+                    id = Integer.parseInt(String.valueOf(allUsers.get(i).getId()));
                     rtrn = true;
                     Toast.makeText(this, "Uspjesno ulogirani!", Toast.LENGTH_SHORT).show();
 

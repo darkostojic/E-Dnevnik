@@ -43,7 +43,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activitys.Register" />
         <activity android:name=".Activitys.SubjectListActivity" />
-        <activity android:name=".Activitys.SelectedSubjectsActivity"></activity>
+        <activity android:name=".Activitys.SelectedSubjectsActivity" />
+        <activity android:name=".Activitys.ChangeInfo"></activity>
     </application>
 
 </manifest>

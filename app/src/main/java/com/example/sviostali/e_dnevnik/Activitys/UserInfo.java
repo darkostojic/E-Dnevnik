@@ -28,7 +28,7 @@ public class UserInfo extends AppCompatActivity
     TextView tvUI1, tvUI2, tvUI3, tvUI4;
     ImageView avatar;
     public String username, avatarurl;
-
+    public int id;
 
 
     @Override
@@ -52,9 +52,8 @@ public class UserInfo extends AppCompatActivity
         /** Iz bundlea uzme username, i u showdata provjeri username i pokupi ostale podatke da ih moze koristiti*/
         Bundle s = getIntent().getExtras();
 
-        long id = s.getLong("id");
-        int tmp = Integer.parseInt(String.valueOf(id));
-        showData(tmp);
+        id = s.getInt("id");
+        showData(id);
 
 
 
@@ -107,17 +106,11 @@ public class UserInfo extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        if (id == R.id.change_info) {
+            Intent i = new Intent(UserInfo.this, ChangeInfo.class);
+            i.putExtra("id", this.id);
+            startActivity(i);
+        } else if (id == R.id.change_pass) {
 
         }
 

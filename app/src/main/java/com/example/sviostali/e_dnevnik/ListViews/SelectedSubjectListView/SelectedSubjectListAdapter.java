@@ -21,7 +21,6 @@ public class SelectedSubjectListAdapter extends BaseAdapter {
 
     public subjects sub;
     public List<subjects> list;
-    public List<subjects> tmp;
     public Context context;
 
     public usersugar us;
@@ -35,9 +34,7 @@ public class SelectedSubjectListAdapter extends BaseAdapter {
         us = usersugar.findById(usersugar.class,id);
         list = us.getSubjects();
 
-
     }
-
 
 
     @Override
