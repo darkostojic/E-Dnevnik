@@ -15,10 +15,10 @@ import com.orm.SugarContext;
 public class ChangeInfo extends AppCompatActivity {
 
     public Button change;
-    public EditText etCIname, etCIlastname, etCIDate;
+    public EditText etCIname, etCIlastname, etCIDate, etCIAvatar;
     public int id;
     public usersugar user;
-    public String FName, LName, Date;
+    public String FName, LName, Date, Avatar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +32,7 @@ public class ChangeInfo extends AppCompatActivity {
         etCIname = (EditText) findViewById(R.id.etCIname);
         etCIlastname = (EditText) findViewById(R.id.etCILastname);
         etCIDate = (EditText) findViewById(R.id.etCIDate);
+        etCIAvatar = (EditText) findViewById(R.id.etCIAvatar);
 
         user=usersugar.findById(usersugar.class, id);
 
@@ -43,12 +44,15 @@ public class ChangeInfo extends AppCompatActivity {
                 FName = etCIname.getText().toString();
                 LName = etCIlastname.getText().toString();
                 Date = etCIDate.getText().toString();
+                Avatar = etCIAvatar.getText().toString();
                 if(FName.equals("")&&LName.equals("")&&Date.equals("")){
                     Toast.makeText(ChangeInfo.this, "Unesite sve podatke", Toast.LENGTH_SHORT).show();
                 }else {
                     user.setFirstname(FName);
                     user.setLastname(LName);
                     user.setBirthdate(Date);
+                    if(!Avatar.equals(""))
+                        user.setAvatar(Avatar);
                     user.save();
                     Intent i = new Intent(ChangeInfo.this, UserInfo.class);
                     i.putExtra("id",id);

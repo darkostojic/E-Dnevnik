@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.sviostali.e_dnevnik.R;
 import com.example.sviostali.e_dnevnik.sugarclasses.usersugar;
 import com.orm.SugarContext;
@@ -127,6 +128,10 @@ public class UserInfo extends AppCompatActivity
         tvUI1.setText("Username: "+user.getLogin());
         tvUI2.setText("Ime: "+user.getFirstname());
         tvUI3.setText("Prezime: "+user.getLastname());
+        avatarurl = user.getAvatar();
+        Glide.with(this)
+                .load(avatarurl)
+                .into(avatar);
         avatarurl = user.getAvatar();
         tvUI4.setText(user.getBirthdate());
         if(user.getProfessor()==1) { //Gornje za profesore, donje za studente

@@ -49,4 +49,14 @@
         android:layout_below="@+id/etCIDate"
         android:layout_centerHorizontal="true" />
 
+    <EditText
+        android:id="@+id/etCIAvatar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etCIDate"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:hint="Avatar(ostavi prazno ako ne zelis mjenjati)"
+        android:inputType="textPersonName" />
+
 </RelativeLayout>
