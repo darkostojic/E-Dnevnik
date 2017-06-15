@@ -1,15 +1,7 @@
-package com.example.sviostali.e_dnevnik;
+package com.example.sviostali.e_dnevnik.Activitys;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -22,12 +14,8 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-
+import com.example.sviostali.e_dnevnik.R;
 import com.example.sviostali.e_dnevnik.sugarclasses.usersugar;
 import com.orm.SugarContext;
 
@@ -152,6 +140,14 @@ public class UserInfo extends AppCompatActivity
 
             btnUI1.setText("Vaši predmeti");// dodat onclicklistenere za sva 4 kad napravimo predmete i ocjene itd
             btnUI2.setText("Dodavanje predmeta");
+
+            btnUI1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(UserInfo.this, SelectedSubjectsActivity.class);
+                    startActivity(i);
+                }
+            });
 
             btnUI2.setOnClickListener(new View.OnClickListener() {
                 @Override

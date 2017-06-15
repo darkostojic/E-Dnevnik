@@ -1,4 +1,4 @@
-package com.example.sviostali.e_dnevnik;
+package com.example.sviostali.e_dnevnik.Activitys;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.sviostali.e_dnevnik.R;
 import com.example.sviostali.e_dnevnik.sugarclasses.usersugar;
 import com.orm.SugarContext;
 

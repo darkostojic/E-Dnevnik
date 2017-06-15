@@ -1,4 +1,4 @@
-package com.example.sviostali.e_dnevnik;
+package com.example.sviostali.e_dnevnik.ListViews.SubjectListView;
 
 
 

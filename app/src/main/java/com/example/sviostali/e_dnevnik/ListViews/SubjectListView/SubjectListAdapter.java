@@ -1,4 +1,4 @@
-package com.example.sviostali.e_dnevnik;
+package com.example.sviostali.e_dnevnik.ListViews.SubjectListView;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -9,6 +9,8 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
+
+import com.example.sviostali.e_dnevnik.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
