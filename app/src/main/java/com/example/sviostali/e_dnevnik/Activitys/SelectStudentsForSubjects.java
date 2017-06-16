@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.sviostali.e_dnevnik.ListViews.UsersListAdapter.UserList;
 import com.example.sviostali.e_dnevnik.ListViews.UsersListAdapter.UserListAdapter;
@@ -46,13 +47,15 @@ public class SelectStudentsForSubjects extends AppCompatActivity {
                 usersugar user = usersugar.findById(usersugar.class, id);
 
                 studentsubject stsub;
-                for (UserList u1 : userListAdapter.getUserList()){
-                    if (u1.isMarked()){
-                        stsub = new studentsubject(u1.getUser(), sub); //korisnik i u drugi dio nakon zareza trebalo bi proslijedit predmet
+                for(int i=0;i<userListAdapter.getUserList().size();i++){
+
+                    if(userListAdapter.getUserList().get(i).isMarked()){
+                        stsub = new studentsubject(userListAdapter.getSUser(i), sub);
                         stsub.save();
                     }
-
                 }
+
+
             finish();
             }
         });

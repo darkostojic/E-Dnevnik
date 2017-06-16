@@ -20,11 +20,13 @@ import java.util.List;
 public class UserListAdapter extends BaseAdapter{
     public List<String> list;
     public List<UserList> userList;
+    public List<usersugar> userSList;
     public Context context;
 
     public UserListAdapter(Context c){
         context = c;
         userList = new ArrayList<UserList>();
+        userSList = new ArrayList<usersugar>();
 
         List<usersugar> allUsers = usersugar.listAll(usersugar.class);
 
@@ -35,6 +37,7 @@ public class UserListAdapter extends BaseAdapter{
 
             if ((d == 0)) {
                 userList.add(new UserList(allUsers.get(i).getLogin()));
+                userSList.add(allUsers.get(i));
             }
 
         }
@@ -78,6 +81,10 @@ public class UserListAdapter extends BaseAdapter{
         });
 
         return row;
+    }
+
+    public usersugar getSUser(int i) {
+        return userSList.get(i);
     }
 
     public List<UserList> getUserList(){

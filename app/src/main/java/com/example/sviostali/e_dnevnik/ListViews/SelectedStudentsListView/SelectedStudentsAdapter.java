@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.sviostali.e_dnevnik.R;
 import com.example.sviostali.e_dnevnik.sugarclasses.studentsubject;
@@ -57,6 +58,6 @@ public class SelectedStudentsAdapter extends BaseAdapter {
         tvStudent.setText(student.getLogin());
 
 
-        return null;
+        return row;
     }
 }

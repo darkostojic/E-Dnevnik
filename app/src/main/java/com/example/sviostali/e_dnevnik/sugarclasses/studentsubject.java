@@ -7,7 +7,7 @@ public class studentsubject extends SugarRecord {
     public usersugar user;
     public subjects subject;
 
-    public studentsubject(String user, subjects sub) {
+    public studentsubject() {
     }
 
     public studentsubject(usersugar user, subjects subject) {

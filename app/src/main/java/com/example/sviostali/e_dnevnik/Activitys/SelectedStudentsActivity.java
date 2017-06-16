@@ -31,8 +31,8 @@ public class SelectedStudentsActivity extends AppCompatActivity {
         SStudent = new SelectedStudentsAdapter(this, id);
 
 
-        lvSelectedStudents = (ListView) findViewById(R.id.lvSelectedSubjects);
-        //lvSelectedStudents.setAdapter(SStudent);
+        lvSelectedStudents = (ListView) findViewById(R.id.lvSelectedStudents);
+        lvSelectedStudents.setAdapter(SStudent);
 
     }
 }
