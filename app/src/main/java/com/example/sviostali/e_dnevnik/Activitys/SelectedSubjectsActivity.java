@@ -32,17 +32,6 @@ public class SelectedSubjectsActivity extends AppCompatActivity {
         lvSSubjects = (ListView) findViewById(R.id.lvSelectedSubjects);
         lvSSubjects.setAdapter(SSAdapter);
 
-        lvSSubjects.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //String value = lvSSubjects.getItemAtPosition(position).toString(); //null pointer exception, ne moze nac ime predmeta a nisam uspio u handleru proslijedit ime, htio da proslijedim ime pa da pretrazim predmete dok se ne poklopi ime i to koristit kao subject pri odabiru ucenika
-                Intent i = new Intent(SelectedSubjectsActivity.this, SelectedSubject.class);
-                //i.putExtra("predmet", value);
-                startActivity(i);
-            }
-        });
-
-
 
     }
 }

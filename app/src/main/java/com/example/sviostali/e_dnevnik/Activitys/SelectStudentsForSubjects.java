@@ -19,6 +19,8 @@ public class SelectStudentsForSubjects extends AppCompatActivity {
     public Button bAccept;
     public ListView lvStudents;
     public UserListAdapter userListAdapter;
+    long id;
+    subjects sub;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,26 +34,27 @@ public class SelectStudentsForSubjects extends AppCompatActivity {
         lvStudents = (ListView) findViewById(R.id.lvSubjects); // zove se lvStudents radi olaksanja pri pisanju
         lvStudents.setAdapter(userListAdapter);
 
+        Bundle s = getIntent().getExtras();
+        id = s.getLong("id");
+        sub = subjects.findById(subjects.class,id);
 
-/*
         bAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Bundle s = getIntent().getExtras();
-                int id = s.getInt("id");
+
                 usersugar user = usersugar.findById(usersugar.class, id);
-                subjects sub;
+
                 studentsubject stsub;
                 for (UserList u1 : userListAdapter.getUserList()){
                     if (u1.isMarked()){
-                        stsub = new studentsubject(u1.getUser(), )); //korisnik i u drugi dio nakon zareza trebalo bi proslijedit predmet
+                        stsub = new studentsubject(u1.getUser(), sub); //korisnik i u drugi dio nakon zareza trebalo bi proslijedit predmet
                         stsub.save();
                     }
 
                 }
-
+            finish();
             }
-        });*/
+        });
     }
 }

@@ -16,7 +16,7 @@
             android:value="mydb.db" />
         <meta-data
             android:name="VERSION"
-            android:value="6" />
+            android:value="7" />
         <meta-data
             android:name="QUERY_LOG"
             android:value="true" />
@@ -46,7 +46,8 @@
         <activity android:name=".Activitys.SelectedSubjectsActivity" />
         <activity android:name=".Activitys.ChangeInfo" />
         <activity android:name=".Activitys.SelectStudentsForSubjects" />
-        <activity android:name=".Activitys.SelectedSubject"></activity>
+        <activity android:name=".Activitys.SelectedSubject" />
+        <activity android:name=".Activitys.SelectedStudentsActivity"></activity>
     </application>
 
 </manifest>

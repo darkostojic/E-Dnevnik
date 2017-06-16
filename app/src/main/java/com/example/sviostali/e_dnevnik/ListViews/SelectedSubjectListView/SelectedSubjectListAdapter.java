@@ -2,6 +2,7 @@ package com.example.sviostali.e_dnevnik.ListViews.SelectedSubjectListView;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,11 +11,15 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sviostali.e_dnevnik.Activitys.SelectedSubject;
+import com.example.sviostali.e_dnevnik.Activitys.SelectedSubjectsActivity;
 import com.example.sviostali.e_dnevnik.R;
 import com.example.sviostali.e_dnevnik.sugarclasses.subjects;
 import com.example.sviostali.e_dnevnik.sugarclasses.usersugar;
 
 import java.util.List;
+
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 public class SelectedSubjectListAdapter extends BaseAdapter {
 
@@ -33,6 +38,7 @@ public class SelectedSubjectListAdapter extends BaseAdapter {
         this.context = c;
         us = usersugar.findById(usersugar.class,id);
         list = us.getSubjects();
+
 
     }
 
@@ -53,7 +59,7 @@ public class SelectedSubjectListAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup viewGroup) {
+    public View getView(int position, final View convertView, ViewGroup viewGroup) {
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View row = layoutInflater.inflate(R.layout.selected_subject_list, viewGroup, false);
 
@@ -61,7 +67,17 @@ public class SelectedSubjectListAdapter extends BaseAdapter {
 
         sub = list.get(position);
         subject.setText(sub.getName());
+        final long id = sub.getId();
+        row.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context , SelectedSubject.class);
+                i.addFlags(FLAG_ACTIVITY_NEW_TASK);
+                i.putExtra("id", id);
+                context.startActivity(i);
 
+            }
+        });
 
         return row;
     }
