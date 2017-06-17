@@ -1,6 +1,7 @@
 package com.example.sviostali.e_dnevnik.ListViews.SelectedStudentsListView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,12 +9,16 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sviostali.e_dnevnik.Activitys.SelectedSubject;
+import com.example.sviostali.e_dnevnik.Activitys.StudentReview;
 import com.example.sviostali.e_dnevnik.R;
 import com.example.sviostali.e_dnevnik.sugarclasses.studentsubject;
 import com.example.sviostali.e_dnevnik.sugarclasses.subjects;
 import com.example.sviostali.e_dnevnik.sugarclasses.usersugar;
 
 import java.util.List;
+
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 
 public class SelectedStudentsAdapter extends BaseAdapter {
@@ -56,6 +61,16 @@ public class SelectedStudentsAdapter extends BaseAdapter {
         stud_sub = list.get(position);
         student = stud_sub.getUser();
         tvStudent.setText(student.getLogin());
+        final long tmpid = stud_sub.getId();
+        row.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context , StudentReview.class);
+                i.addFlags(FLAG_ACTIVITY_NEW_TASK);
+                i.putExtra("id", tmpid);
+                context.startActivity(i);
+            }
+        });
 
 
         return row;

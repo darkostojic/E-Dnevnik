@@ -50,7 +50,7 @@ public class SelectStudentsForSubjects extends AppCompatActivity {
                 for(int i=0;i<userListAdapter.getUserList().size();i++){
 
                     if(userListAdapter.getUserList().get(i).isMarked()){
-                        stsub = new studentsubject(userListAdapter.getSUser(i), sub);
+                        stsub = new studentsubject(userListAdapter.getSUser(i), sub, 0);
                         stsub.save();
                     }
                 }
