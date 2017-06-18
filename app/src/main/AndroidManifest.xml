@@ -24,23 +24,21 @@
             android:name="DOMAIN_PACKAGE_NAME"
             android:value="com.example.sviostali.e_dnevnik" />
 
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".Activitys.UserInfo"
+            android:label="@string/title_activity_user_info"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ItemList" />
+        <activity
+            android:name=".Activitys.Login"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Activitys.UserInfo"
-            android:label="@string/title_activity_user_info"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".StudentList" />
-        <activity android:name=".ItemList" />
-        <activity
-            android:name=".Activitys.Login"
-            android:label="@string/title_activity_login"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".Activitys.Register" />
         <activity android:name=".Activitys.SubjectListActivity" />
         <activity android:name=".Activitys.SelectedSubjectsActivity" />

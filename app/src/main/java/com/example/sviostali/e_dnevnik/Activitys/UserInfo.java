@@ -141,6 +141,8 @@ public class UserInfo extends AppCompatActivity
             btnUI1.setText("Popis predmeta");
             btnUI2.setText("Ocjene");
 
+            btnUI2.setVisibility(View.GONE);
+
             btnUI1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
