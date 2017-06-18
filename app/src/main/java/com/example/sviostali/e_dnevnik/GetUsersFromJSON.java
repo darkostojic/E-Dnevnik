@@ -43,7 +43,7 @@ public class GetUsersFromJSON extends AppCompatActivity {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         login = jsonObject.getString("login");
                         avatar = jsonObject.getString("avatar_url");
-                        user = new usersugar(login,"1234", avatar,"fistname","lastname","01.01.2000.",0);
+                        user = new usersugar(login,"1234", avatar,"firstname","lastname","01.01.2000.",0);
                         user.save();
 
                     }

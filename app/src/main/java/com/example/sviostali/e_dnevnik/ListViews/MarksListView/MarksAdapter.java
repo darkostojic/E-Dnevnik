@@ -1,13 +1,18 @@
 package com.example.sviostali.e_dnevnik.ListViews.MarksListView;
 
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.sviostali.e_dnevnik.Activitys.StudentReview;
 import com.example.sviostali.e_dnevnik.R;
 import com.example.sviostali.e_dnevnik.sugarclasses.marks;
 import com.example.sviostali.e_dnevnik.sugarclasses.studentsubject;
@@ -53,9 +58,43 @@ public class MarksAdapter extends BaseAdapter {
         TextView tvDate = (TextView) row.findViewById(R.id.tvMLdate);
         TextView tvMark = (TextView) row.findViewById(R.id.tvMLmark);
         mark = list.get(position);
+        final marks tmpmarks = mark;
 
         tvDate.setText(mark.getDate());
         tvMark.setText(mark.getMark()+"");
+
+        row.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("Brisanje ocjene");
+                builder.setMessage("Da li ste sigurni da zelite izbrisati ovu ocjenu?  " + tmpmarks.getDate() + "  -  " + tmpmarks.getMark() );
+                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int which) {
+                        tmpmarks.delete();
+                        notifyDataSetChanged();
+                        dialog.dismiss();
+                        Intent intent= new Intent(context, StudentReview.class);
+                        context.startActivity(intent);
+                        ((Activity)context).finish();
+                    }
+                });
+                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        // Do nothing
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
+                return true;
+            }
+        });
 
 
 
