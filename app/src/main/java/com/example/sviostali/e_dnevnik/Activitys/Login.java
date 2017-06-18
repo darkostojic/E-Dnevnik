@@ -12,7 +12,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.sviostali.e_dnevnik.GetUsersFromJSON;
-import com.example.sviostali.e_dnevnik.MainActivity;
 import com.example.sviostali.e_dnevnik.R;
 import com.example.sviostali.e_dnevnik.sugarclasses.usersugar;
 import com.orm.SugarContext;
@@ -74,7 +73,6 @@ public class Login extends AppCompatActivity {
                         Intent i = new Intent(Login.this, UserInfo.class);
                         i.putExtra("id", id);
                         startActivity(i);
-                        finish();
                     }else{
                         Toast.makeText(Login.this, "Korisničko ime/lozinka ne postoji/netocno.", Toast.LENGTH_SHORT).show();
                         etLPassword.setText("");
