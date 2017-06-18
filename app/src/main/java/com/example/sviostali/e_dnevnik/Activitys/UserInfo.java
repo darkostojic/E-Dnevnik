@@ -158,8 +158,17 @@ public class UserInfo extends AppCompatActivity
             });
 
         }else{
-            btnUI1.setText("Popis profesora");
+            btnUI1.setText("Popis predmeta");
             btnUI2.setText("Ocjene");
+
+            btnUI1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(UserInfo.this, StudentsSubjects.class);
+                    i.putExtra("id", id);
+                    startActivity(i);
+                }
+            });
         }
 
 

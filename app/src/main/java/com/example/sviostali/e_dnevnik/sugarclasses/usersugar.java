@@ -32,6 +32,10 @@ public class usersugar extends SugarRecord {
         return subjects.find(subjects.class, "user = ?", String.valueOf(this.getId()));
     }
 
+    public List<studentsubject> getStudSub(){
+        return studentsubject.find(studentsubject.class, "user = ?", String.valueOf(this.getId()));
+    }
+
 
     public String getLogin() {
         return login;

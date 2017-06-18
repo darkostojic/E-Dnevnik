@@ -48,7 +48,8 @@
         <activity android:name=".Activitys.SelectStudentsForSubjects" />
         <activity android:name=".Activitys.SelectedSubject" />
         <activity android:name=".Activitys.SelectedStudentsActivity" />
-        <activity android:name=".Activitys.StudentReview"></activity>
+        <activity android:name=".Activitys.StudentReview" />
+        <activity android:name=".Activitys.StudentsSubjects"></activity>
     </application>
 
 </manifest>
