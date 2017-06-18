@@ -1,14 +1,17 @@
 package com.example.sviostali.e_dnevnik.Activitys;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.sviostali.e_dnevnik.GetUsersFromJSON;
 import com.example.sviostali.e_dnevnik.MainActivity;
 import com.example.sviostali.e_dnevnik.R;
 import com.example.sviostali.e_dnevnik.sugarclasses.usersugar;
@@ -22,6 +25,7 @@ public class Login extends AppCompatActivity {
     Button btnLBack, btnLLogin, btnLRegister;
     public String username, password;
     public int id;
+    public GetUsersFromJSON g;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +39,17 @@ public class Login extends AppCompatActivity {
         btnLLogin = (Button) findViewById(R.id.btnLLogin);
         btnLRegister = (Button) findViewById(R.id.btnLRegister);
 
+        g = new GetUsersFromJSON(this);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String store = preferences.getString("stored", "");
+        if(store.equalsIgnoreCase(""))
+        {
+            Toast.makeText(this, "uslo je", Toast.LENGTH_SHORT).show();
+            g.getData();
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString("stored","Data is stored");
+            editor.commit();
+        }
 
 
         /**
@@ -47,8 +62,7 @@ public class Login extends AppCompatActivity {
         btnLBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Login.this, MainActivity.class);
-                startActivity(i);
+            finish();
             }
         });
 

@@ -40,7 +40,7 @@
         <activity
             android:name=".Activitys.Login"
             android:label="@string/title_activity_login"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".Activitys.Register" />
         <activity android:name=".Activitys.SubjectListActivity" />
         <activity android:name=".Activitys.SelectedSubjectsActivity" />
@@ -49,7 +49,8 @@
         <activity android:name=".Activitys.SelectedSubject" />
         <activity android:name=".Activitys.SelectedStudentsActivity" />
         <activity android:name=".Activitys.StudentReview" />
-        <activity android:name=".Activitys.StudentsSubjects"></activity>
+        <activity android:name=".Activitys.StudentsSubjects" />
+        <activity android:name=".Activitys.StudentMarks"></activity>
     </application>
 
 </manifest>

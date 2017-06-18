@@ -10,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.sviostali.e_dnevnik.Activitys.SelectedSubject;
+import com.example.sviostali.e_dnevnik.Activitys.StudentMarks;
 import com.example.sviostali.e_dnevnik.R;
 import com.example.sviostali.e_dnevnik.sugarclasses.subjects;
 import com.example.sviostali.e_dnevnik.sugarclasses.studentsubject;
@@ -63,7 +64,7 @@ public class StudentsSubjectAdapter extends BaseAdapter {
         row.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(context , SelectedSubject.class);
+                Intent i = new Intent(context , StudentMarks.class);
                 i.addFlags(FLAG_ACTIVITY_NEW_TASK);
                 i.putExtra("id", list.get(position).getId());
                 context.startActivity(i);
