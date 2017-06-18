@@ -9,14 +9,16 @@ public class studentsubject extends SugarRecord {
     public usersugar user;
     public subjects subject;
     public int finalmark;
+    public int absence;
 
     public studentsubject() {
     }
 
-    public studentsubject(usersugar user, subjects subject, int finalmark) {
+    public studentsubject(usersugar user, subjects subject, int finalmark, int absence) {
         this.user = user;
         this.subject = subject;
         this.finalmark = finalmark;
+        this.absence = absence;
     }
 
     public int getFinalmark() {
@@ -31,6 +33,14 @@ public class studentsubject extends SugarRecord {
         return marks.find(marks.class, "studsub = ?", String.valueOf(this.getId()));
     }
 
+
+    public int getAbsence() {
+        return absence;
+    }
+
+    public void setAbsence(int absence) {
+        this.absence = absence;
+    }
 
     public usersugar getUser() {
         return user;

@@ -28,8 +28,8 @@ import java.util.List;
 
 public class StudentReview extends AppCompatActivity {
 
-    public TextView tvName, tvAverage, tvFinalMark, tvBirthDate;
-    public Button btnSetMark, btnSetFinalMark, btnAutoSetFinalMark;
+    public TextView tvName, tvAverage, tvFinalMark, tvBirthDate, tvAbsence;
+    public Button btnSetMark, btnSetFinalMark, btnAutoSetFinalMark, btnRmvAbsence,btnAddAbsence;
     public ImageView ivAvatar;
     public long id;
     public float avg, sum;
@@ -49,10 +49,15 @@ public class StudentReview extends AppCompatActivity {
         tvAverage = (TextView) findViewById(R.id.tvURaverage);
         tvFinalMark = (TextView) findViewById(R.id.tvURFinalMark);
         tvBirthDate = (TextView) findViewById(R.id.tvURbirthdate);
+        tvAbsence = (TextView) findViewById(R.id.tvSRabsence);
 
         btnSetMark = (Button) findViewById(R.id.btnURsetMark);
         btnSetFinalMark = (Button) findViewById(R.id.btnURsetFinalMark);
         btnAutoSetFinalMark = (Button) findViewById(R.id.btnURautosetFinalMark);
+        btnRmvAbsence = (Button) findViewById(R.id.btnSRremoveAbsence);
+        btnAddAbsence = (Button) findViewById(R.id.btnSRaddAbsence);
+
+
 
         ivAvatar = (ImageView) findViewById(R.id.ivSRavatar);
 
@@ -60,6 +65,8 @@ public class StudentReview extends AppCompatActivity {
 
         id = s.getLong("id");
         stud_sub = studentsubject.findById(studentsubject.class, id);
+
+        tvAbsence.setText(stud_sub.getAbsence()+"");
 
         MAdapter = new MarksAdapter(this, id);
         lvMarks = (ListView) findViewById(R.id.lvSRmarks);
@@ -182,6 +189,31 @@ public class StudentReview extends AppCompatActivity {
                 tvFinalMark.setText("Zaključna ocjena je: "+tmp);
             }
         });
+
+        btnAddAbsence.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int tmp = stud_sub.getAbsence();
+                tmp = tmp+1;
+                stud_sub.setAbsence(tmp);
+                stud_sub.save();
+                tvAbsence.setText(tmp+"");
+            }
+        });
+
+        btnRmvAbsence.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int tmp = stud_sub.getAbsence();
+                tmp = tmp-1;
+                if(tmp>=0) {
+                    stud_sub.setAbsence(tmp);
+                    stud_sub.save();
+                    tvAbsence.setText(tmp + "");
+                }
+            }
+        });
+
 
     }
 
