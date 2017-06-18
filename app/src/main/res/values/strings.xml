@@ -27,4 +27,16 @@
     <string name="login_bBack">Odustani</string>
     <string name="login_bLogin">Prijavi Se</string>
     <string name="SubjectList_bAccept">Potvrdi</string>
+    <string name="ponovi_novu_sifru">Ponovi novu sifru</string>
+    <string name="unesi_novu_sifru">Unesi novu sifru</string>
+    <string name="unesi_staru_sifru">Unesi staru sifru</string>
+    <string name="promjenichangepass">Promjeni</string>
+    <string name="imechangeinfo">Ime</string>
+    <string name="prezimechangeinfo">Prezime</string>
+    <string name="changeinfobirth_date">Birth Date</string>
+    <string name="a_urirajchangeinfo">Ažuriraj</string>
+    <string name="avatar_changeinfo">Avatar(ostavi prazno ako ne zelis mjenjati)</string>
+    <string name="hrvatskichangeinfo">Hrvatski</string>
+    <string name="vasi_ucenicichangeinfo">Vasi Ucenici</string>
+    <string name="odabir_ucenikachangeinfo">Odabir ucenika</string>
 </resources>

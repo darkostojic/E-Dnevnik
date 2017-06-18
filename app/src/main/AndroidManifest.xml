@@ -48,7 +48,8 @@
         <activity android:name=".Activitys.SelectedStudentsActivity" />
         <activity android:name=".Activitys.StudentReview" />
         <activity android:name=".Activitys.StudentsSubjects" />
-        <activity android:name=".Activitys.StudentMarks"></activity>
+        <activity android:name=".Activitys.StudentMarks" />
+        <activity android:name=".Activitys.ChangePassword"></activity>
     </application>
 
 </manifest>

@@ -14,7 +14,7 @@ import com.orm.SugarContext;
 
 public class Register extends AppCompatActivity {
 
-    EditText etRFName, etRLName, etRUsername, etRPassword1, etRPassword2, etRDateOfBirth, etRAdminKod;
+    EditText etRFName, etRLName, etRUsername, etRPassword1, etRPassword2, etRDateOfBirth;
     Button btnRRegister, btnRReset;
 
     public String firstName, lastName, username, password, dateofbirth;
@@ -35,14 +35,12 @@ public class Register extends AppCompatActivity {
         etRPassword1 = (EditText) findViewById(R.id.etRPassword1);
         etRPassword2 = (EditText) findViewById(R.id.etRPassword2);
         etRDateOfBirth = (EditText) findViewById(R.id.etRDateOfBirth);
-        etRAdminKod = (EditText) findViewById(R.id.etRAdminKod);
         btnRRegister = (Button) findViewById(R.id.btnRRegister);
         btnRReset = (Button) findViewById(R.id.btnRReset);
 
         /**
          * Trenutno sam dodao boolean da provjeri ako ima ijedno polje prazno
          * Ako skontam neki drugi nacin unutar iducih 5 min promjenim al za sad radi
-         * takodjer sam dodao admin kod - 1234 koji stoji na dnu zaslona kad se registriras
          * -Edo
          * **/
         btnRRegister.setOnClickListener(new View.OnClickListener() {
@@ -50,12 +48,7 @@ public class Register extends AppCompatActivity {
             public void onClick(View v) {
                 if(checkIfEmpty()==false) {
                     if(passwordsMatch() == true) {
-                        if(etRAdminKod.getText().toString().equals("1234")) {
                             insertData();
-                        }else {
-                            Toast.makeText(Register.this, "Admin code wrong, cannot register!", Toast.LENGTH_SHORT).show();
-                            clearETs();
-                        }
                     }
                 }
                 else{

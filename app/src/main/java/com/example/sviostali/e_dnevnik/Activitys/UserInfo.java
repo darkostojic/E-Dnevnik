@@ -92,7 +92,9 @@ public class UserInfo extends AppCompatActivity
             i.putExtra("id", this.id);
             startActivity(i);
         } else if (id == R.id.change_pass) {
-
+            Intent i = new Intent(UserInfo.this, ChangePassword.class);
+            i.putExtra("id", this.id);
+            startActivity(i);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

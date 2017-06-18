@@ -13,7 +13,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:ems="10"
-        android:hint="Ime"
+        android:hint="@string/imechangeinfo"
         android:inputType="textPersonName" />
 
     <EditText
@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Prezime"
+        android:hint="@string/prezimechangeinfo"
         android:inputType="textPersonName"
         android:layout_below="@+id/etCIname"
         android:layout_alignParentLeft="true"
@@ -32,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Birth Date"
+        android:hint="@string/changeinfobirth_date"
         android:inputType="datetime"
         android:layout_below="@+id/etCILastname"
         android:layout_alignParentLeft="true"
@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="81dp"
         android:backgroundTint="@color/buttonColor"
-        android:text="Ažuriraj"
+        android:text="@string/a_urirajchangeinfo"
         android:layout_below="@+id/etCIDate"
         android:layout_centerHorizontal="true" />
 
@@ -56,7 +56,7 @@
         android:layout_below="@+id/etCIDate"
         android:layout_centerHorizontal="true"
         android:ems="10"
-        android:hint="Avatar(ostavi prazno ako ne zelis mjenjati)"
+        android:hint="@string/avatar_changeinfo"
         android:inputType="textPersonName" />
 
 </RelativeLayout>
