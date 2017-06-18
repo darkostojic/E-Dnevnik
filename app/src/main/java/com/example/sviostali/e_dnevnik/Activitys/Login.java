@@ -44,7 +44,6 @@ public class Login extends AppCompatActivity {
         String store = preferences.getString("stored", "");
         if(store.equalsIgnoreCase(""))
         {
-            Toast.makeText(this, "uslo je", Toast.LENGTH_SHORT).show();
             g.getData();
             SharedPreferences.Editor editor = preferences.edit();
             editor.putString("stored","Data is stored");
